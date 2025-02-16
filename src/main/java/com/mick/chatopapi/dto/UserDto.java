@@ -1,4 +1,6 @@
 package com.mick.chatopapi.dto;
 
-public record UserDto(Integer id, String email, String name, String created_at, String updated_at) {
+import java.time.LocalDateTime;
+
+public record UserDto(Integer id, String email, String name, LocalDateTime created_at, LocalDateTime updated_at) {
 }
