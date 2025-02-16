@@ -39,7 +39,6 @@ public class UserController {
             return ResponseEntity.badRequest().body(result.getAllErrors());
         }
         try {
-            System.out.println(request);
             return ResponseEntity.ok(userService.register(request));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Échec de l'enregistrement : " + e.getMessage());

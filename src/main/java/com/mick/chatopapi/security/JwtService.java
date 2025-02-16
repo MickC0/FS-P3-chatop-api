@@ -26,7 +26,6 @@ public class JwtService {
                 .expiresAt(Instant.now().plus(1, ChronoUnit.DAYS))
                 .subject(authentication.getName())
                 .build();
-        JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS512).build(), claims);
-        return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
+        return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

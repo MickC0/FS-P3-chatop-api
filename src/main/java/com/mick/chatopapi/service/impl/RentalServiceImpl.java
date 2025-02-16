@@ -35,7 +35,7 @@ public class RentalServiceImpl implements RentalService {
     private final RentalMapper rentalMapper;
     private final UserRepository userRepository;
 
-    @Value("${file.storage.location}")
+    @Value("${spring.servlet.multipart.location}")
     private String uploadDir;
 
     public RentalServiceImpl(RentalRepository rentalRepository, RentalMapper rentalMapper, UserRepository userRepository) {
