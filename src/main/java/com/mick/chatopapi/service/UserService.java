@@ -11,4 +11,5 @@ public interface UserService {
     AuthResponse login(LoginRequest loginRequest) throws Exception;
     AuthResponse register(RegisterRequest registerRequest);
     UserDto getAuthenticatedUser(Authentication authentication);
+    UserDto getUserById(Integer id);
 }

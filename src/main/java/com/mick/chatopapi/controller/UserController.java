@@ -2,6 +2,7 @@ package com.mick.chatopapi.controller;
 
 import com.mick.chatopapi.dto.LoginRequest;
 import com.mick.chatopapi.dto.RegisterRequest;
+import com.mick.chatopapi.dto.UserDto;
 import com.mick.chatopapi.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -50,7 +51,23 @@ public class UserController {
         try {
             return ResponseEntity.ok(userService.getAuthenticatedUser(authentication));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(e.getMessage());
         }
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUser(@PathVariable Integer id) {
+        try {
+            UserDto user = userService.getUserById(id);
+            if (user == null) {
+                throw new RuntimeException("Utilisateur inconnu");
+            }
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(e.getMessage());
+        }
+    }
+
 }

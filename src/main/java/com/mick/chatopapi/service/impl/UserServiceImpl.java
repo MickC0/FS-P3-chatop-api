@@ -70,4 +70,10 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Utilisateur n'existe pas"));
         return userMapper.toDto(user);
     }
+
+    @Override
+    public UserDto getUserById(Integer id) {
+        UserEntity user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Utilisateur n'existe pas"));
+        return userMapper.toDto(user);
+    }
 }
