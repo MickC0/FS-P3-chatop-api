@@ -85,7 +85,6 @@ public class UserController {
             )
         )
     })
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request, BindingResult result) {
         if (result.hasErrors()) {
@@ -197,35 +196,36 @@ public class UserController {
         summary = "Get the current authenticated user's information",
         security = @SecurityRequirement(name = "bearerAuth"),
         responses = {
-        @ApiResponse(
-            responseCode = "200",
-            description = "Authenticated user's information returned successfully",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = UserDto.class)
+            @ApiResponse(
+                responseCode = "200",
+                description = "Authenticated user's information returned successfully",
+                content = @Content(
+                        mediaType = "application/json",
+                        schema = @Schema(implementation = UserDto.class)
+                )
+            ),
+            @ApiResponse(
+                responseCode = "401",
+                description = "Unauthorized: Authentication is required",
+                content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ErrorResponse.class),
+                    examples = {
+                        @ExampleObject(
+                            name = "UnauthorizedResponse",
+                            value = """
+                            {
+                              "error": "UNAUTHORIZED",
+                              "status": 401,
+                              "reason": "Token missing or invalid"
+                            }
+                            """
+                        )
+                    }
+                )
             )
-        ),
-        @ApiResponse(
-            responseCode = "401",
-            description = "Unauthorized: Authentication is required",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = ErrorResponse.class),
-                examples = {
-                    @ExampleObject(
-                        name = "UnauthorizedResponse",
-                        value = """
-                        {
-                          "error": "UNAUTHORIZED",
-                          "status": 401,
-                          "reason": "Token missing or invalid"
-                        }
-                        """
-                    )
-                }
-            )
-        )
-    })
+        }
+    )
     @GetMapping("/me")
     public ResponseEntity<?> getAuthenticatedUser(Authentication authentication) {
         try {
@@ -294,7 +294,6 @@ public class UserController {
             )
         }
     )
-
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUser(@PathVariable Integer id) {
         try {
