@@ -217,7 +217,7 @@ public class UserController {
                             {
                               "error": "UNAUTHORIZED",
                               "status": 401,
-                              "reason": "Token missing or invalid"
+                              "message": "Token missing or invalid"
                             }
                             """
                         )
@@ -265,7 +265,7 @@ public class UserController {
                             {
                               "error": "UNAUTHORIZED",
                               "status": 401,
-                              "reason": "Token is missing or invalid"
+                              "message": "Token is missing or invalid"
                             }
                             """
                         )
@@ -285,7 +285,7 @@ public class UserController {
                             {
                               "error": "NOT_FOUND",
                               "status": 404,
-                              "reason": "User not found"
+                              "message": "User not found"
                             }
                             """
                         )
