@@ -60,7 +60,7 @@ public class RentalServiceImpl implements RentalService {
     public void createRental(NewRentalDto rentalDto) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity owner = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Utilisateur non authentifié."));
+                .orElseThrow(() -> new RuntimeException("Unauthenticated user"));
 
         RentalEntity rentalEntity = rentalMapper.toEntity(rentalDto);
         rentalEntity.setOwner(owner);
@@ -68,7 +68,7 @@ public class RentalServiceImpl implements RentalService {
         try{
             rentalEntity.setPicture(getImageUrl(saveFile(rentalDto.picture())));
         } catch (IOException e) {
-            throw new RuntimeException("Un problème est survenu avec la photo : " + e);
+            throw new RuntimeException("There was a problem with the photo " + e);
         }
         rentalEntity.setCreated_at(LocalDateTime.now());
         rentalEntity.setUpdated_at(LocalDateTime.now());
@@ -79,7 +79,7 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public void updateRental(Integer id, UpdateRentalDto updateRentalDto) {
         RentalEntity existingRental  = rentalRepository.findById(id).orElseThrow(
-                ()->new NoSuchElementException("Location introuvable")
+                ()->new NoSuchElementException("Rental not found")
         );
         existingRental .setName(updateRentalDto.name());
         existingRental .setSurface(updateRentalDto.surface());
@@ -92,7 +92,7 @@ public class RentalServiceImpl implements RentalService {
                 String savedFilename = saveFile(updateRentalDto.picture());
                 existingRental.setPicture(getImageUrl(savedFilename));
             } catch (IOException e) {
-                throw new RuntimeException("Un problème est survenu avec la nouvelle photo : " + e.getMessage());
+                throw new RuntimeException("There was a problem with the new photo : " + e.getMessage());
             }
         }
         rentalRepository.save(existingRental);
@@ -127,7 +127,7 @@ public class RentalServiceImpl implements RentalService {
         try {
             Files.deleteIfExists(fileToDelete);
         } catch (IOException e) {
-            System.err.println("Impossible de supprimer l'ancienne photo : " + e.getMessage());
+            System.err.println("Unable to delete old photo : " + e.getMessage());
         }
     }
 }
