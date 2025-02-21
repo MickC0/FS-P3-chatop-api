@@ -34,7 +34,7 @@ public class KeyStoreConfiguration {
             keyStore.load(is, storePass.toCharArray());
             return keyStore;
         } catch (Exception e) {
-            throw new IllegalStateException("Impossible de charger le keystore : " + keyStorePath, e);
+            throw new IllegalStateException("Unable to load the keystore: " + keyStorePath, e);
         }
     }
 
@@ -45,9 +45,9 @@ public class KeyStoreConfiguration {
             if (key instanceof PrivateKey privateKey) {
                 return privateKey;
             }
-            throw new IllegalStateException("La clé récupérée n'est pas de type PrivateKey");
+            throw new IllegalStateException("The retrieved key is not of type PrivateKey");
         } catch (Exception e) {
-            throw new IllegalStateException("Impossible de récupérer la clé privée", e);
+            throw new IllegalStateException("Unable to retrieve the private key", e);
         }
     }
 
@@ -56,11 +56,11 @@ public class KeyStoreConfiguration {
         try {
             Certificate cert = keyStore.getCertificate(keyAlias);
             if (cert == null) {
-                throw new IllegalStateException("Certificat introuvable pour l'alias : " + keyAlias);
+                throw new IllegalStateException("Certificate not found for alias : " + keyAlias);
             }
             return cert.getPublicKey();
         } catch (Exception e) {
-            throw new IllegalStateException("Impossible de récupérer la clé publique", e);
+            throw new IllegalStateException("Unable to retrieve the public key", e);
         }
     }
 }
