@@ -6,11 +6,11 @@ Chatop API is the backend of a rental management application. It enables the man
 ## 🚀 Technologies Used
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Maven](https://img.shields.io/badge/Maven-3.9.9-purple)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.2-green)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-green)
 ![MySQL](https://img.shields.io/badge/MySQL-8.5-darkblue)
 
 - **Language**: Java 21
-- **Framework**: Spring Boot 3.4.2
+- **Framework**: Spring Boot 3.4.3
 - **Database**: MySQL 8.5
 - **Authentication**: JWT (JSON Web Token)
 - **API Documentation**: Swagger
