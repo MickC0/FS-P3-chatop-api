@@ -15,18 +15,17 @@ import java.util.List;
 @Configuration
 public class OpenAPIConfiguration {
 
-    @Value("${chatop.openapi.dev-url}")
-    private String devUrl;
+    private final OpenAPIProperties openAPIProperties;
 
-    @Value("${chatop.openapi.prod-url}")
-    private String prodUrl;
-
+    public OpenAPIConfiguration(OpenAPIProperties openAPIProperties) {
+        this.openAPIProperties = openAPIProperties;
+    }
 
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .servers(List.of(new Server().url(devUrl).description("ChatOp API URL in development environment"),
-                        new Server().url(prodUrl).description("ChatOp API URL in production environment")))
+                .servers(List.of(new Server().url(openAPIProperties.getDevUrl()).description("ChatOp API URL in development environment"),
+                        new Server().url(openAPIProperties.getProdUrl()).description("ChatOp API URL in production environment")))
                 .info(new Info()
                         .title("ChatOp API")
                         .description("ChatOp API is the backend for a rental management application. " +
